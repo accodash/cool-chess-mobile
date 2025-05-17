@@ -1,6 +1,13 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+}
+
+val localProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
 }
 
 android {
@@ -18,6 +25,13 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        manifestPlaceholders["auth0Domain"] = "${localProperties["auth0Domain"]}"
+        manifestPlaceholders["auth0Scheme"] = "demo"
+
+        buildConfigField("String", "AUTH0_DOMAIN", "\"${localProperties["auth0Domain"]}\"")
+        buildConfigField("String", "AUTH0_CLIENT_ID", "\"${localProperties["auth0ClientId"]}\"")
+        buildConfigField("String", "AUTH0_AUDIENCE", "\"${localProperties["auth0Audience"]}\"")
+        buildConfigField("String", "BACKEND_URL", "\"${localProperties["backendUrl"]}\"")
     }
 
     buildTypes {
@@ -38,6 +52,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -59,6 +74,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.auth0)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.logging.interceptor)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
