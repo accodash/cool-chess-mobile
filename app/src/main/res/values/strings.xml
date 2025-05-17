@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Cool Chess</string>
+
+    <!--  Tabs  -->
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="ranking">Ranking</string>
+    <string name="social">Social</string>
+    <string name="more">More</string>
+
+    <!--  Login Screen  -->
+    <string name="login_button">Login with Auth0</string>
+    <string name="login_header">Welcome to Cool Chess</string>
+    <string name="login_caption">You have to log in to continue using our mobile app</string>
 </resources>
