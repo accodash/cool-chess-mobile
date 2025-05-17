@@ -12,4 +12,15 @@
     <string name="login_button">Login with Auth0</string>
     <string name="login_header">Welcome to Cool Chess</string>
     <string name="login_caption">You have to log in to continue using our mobile app</string>
+
+    <!--  Logged screen  -->
+    <string name="hello_heading">Hello!</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="bullet">Bullet</string>
+    <string name="blitz">Blitz</string>
+    <string name="rapid">Rapid</string>
+    <string name="elo_rating">Elo Rating:</string>
+    <string name="match">Match!</string>
 </resources>

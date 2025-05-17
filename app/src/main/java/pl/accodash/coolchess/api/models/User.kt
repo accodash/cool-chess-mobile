@@ -1,6 +1,7 @@
 package pl.accodash.coolchess.api.models
 
 import com.google.gson.annotations.SerializedName
+import pl.accodash.coolchess.BuildConfig
 
 data class User(
     val uuid: String,
@@ -11,4 +12,10 @@ data class User(
     val ratings: List<Rating>? = null,
     @SerializedName("followed_users") val followedUsers: List<String>? = null,
     val followers: List<String>? = null
-)
+) {
+    fun getBackendImageUrl(): String? =
+        imageUrl?.replace(
+            "http://localhost",
+            BuildConfig.BACKEND_URL.removeSuffix("/").replace(Regex(":\\d+"), "")
+        )
+}

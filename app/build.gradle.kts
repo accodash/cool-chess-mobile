@@ -81,6 +81,7 @@ dependencies {
     implementation(libs.auth0)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.logging.interceptor)
+    implementation(libs.coil.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

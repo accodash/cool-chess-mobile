@@ -2,6 +2,8 @@ package pl.accodash.coolchess.ui.screens
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -41,17 +43,28 @@ fun LoggedInScreen(user: User, modifier: Modifier = Modifier) {
             }
         }
     ) { innerPadding ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
         ) {
-            Text(
-                text = "${selectedTab.label} Screen\nWelcome, ${user.username}!",
-                style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(16.dp)
-            )
+            when (selectedTab) {
+                BottomNavItem.Home -> HomeScreen(user = user)
+                else -> {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "${stringResource(selectedTab.label)} Screen\nWelcome, ${user.username}!",
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                    }
+                }
+            }
         }
     }
 }
