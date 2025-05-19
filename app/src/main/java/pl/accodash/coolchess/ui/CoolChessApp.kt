@@ -9,7 +9,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
+import pl.accodash.coolchess.R
 import pl.accodash.coolchess.api.RetrofitClient
 import pl.accodash.coolchess.api.models.User
 import pl.accodash.coolchess.api.services.UserService
@@ -37,7 +39,7 @@ fun CoolChessApp(modifier: Modifier = Modifier) {
                     user = userService.getCurrentUser()
                 }
             } catch (e: Exception) {
-                errorMessage = "Failed to auto-login: ${e.message}"
+                errorMessage = e.message
             }
         }
         isLoading = false
@@ -57,7 +59,7 @@ fun CoolChessApp(modifier: Modifier = Modifier) {
                         val userService = RetrofitClient.createService(UserService::class.java, credentials.accessToken)
                         user = userService.getCurrentUser()
                     } catch (e: Exception) {
-                        errorMessage = e.message ?: "Unknown error"
+                        errorMessage = e.message ?: context.getString(R.string.unknown_error)
                     } finally {
                         isLoading = false
                     }
