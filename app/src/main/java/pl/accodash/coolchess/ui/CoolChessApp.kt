@@ -1,6 +1,7 @@
 package pl.accodash.coolchess.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -13,6 +14,7 @@ import pl.accodash.coolchess.api.RetrofitClient
 import pl.accodash.coolchess.api.models.User
 import pl.accodash.coolchess.api.services.UserService
 import pl.accodash.coolchess.auth.AuthManager
+import pl.accodash.coolchess.ui.screens.LoadingScreen
 import pl.accodash.coolchess.ui.screens.LoggedInScreen
 import pl.accodash.coolchess.ui.screens.LoginScreen
 
@@ -21,14 +23,30 @@ fun CoolChessApp(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val authManager = remember { AuthManager(context) }
 
-    var isLoading by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
     var user by remember { mutableStateOf<User?>(null) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     val scope = rememberCoroutineScope()
 
-    if (user == null) {
+    LaunchedEffect(Unit) {
+        if (authManager.hasSavedCredentials()) {
+            try {
+                val credentials = authManager.getSavedCredentials()
+                if (credentials != null) {
+                    val userService = RetrofitClient.createService(UserService::class.java, credentials.accessToken)
+                    user = userService.getCurrentUser()
+                }
+            } catch (e: Exception) {
+                errorMessage = "Failed to auto-login: ${e.message}"
+            }
+        }
+        isLoading = false
+    }
+
+    if (isLoading) {
+        LoadingScreen()
+    } else if (user == null) {
         LoginScreen(
-            isLoading = isLoading,
             errorMessage = errorMessage,
             onLoginClick = {
                 scope.launch {
@@ -36,8 +54,7 @@ fun CoolChessApp(modifier: Modifier = Modifier) {
                     errorMessage = null
                     try {
                         val credentials = authManager.login(context)
-                        val token = credentials.accessToken
-                        val userService = RetrofitClient.createService(UserService::class.java, token)
+                        val userService = RetrofitClient.createService(UserService::class.java, credentials.accessToken)
                         user = userService.getCurrentUser()
                     } catch (e: Exception) {
                         errorMessage = e.message ?: "Unknown error"

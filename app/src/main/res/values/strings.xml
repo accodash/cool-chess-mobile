@@ -12,6 +12,7 @@
     <string name="login_button">Login with Auth0</string>
     <string name="login_header">Welcome to Cool Chess</string>
     <string name="login_caption">You have to log in to continue using our mobile app</string>
+    <string name="loading">Loading...</string>
 
     <!--  Logged screen  -->
     <string name="hello_heading">Hello!</string>

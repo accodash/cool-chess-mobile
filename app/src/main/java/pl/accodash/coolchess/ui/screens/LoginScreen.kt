@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +19,6 @@ import pl.accodash.coolchess.R
 
 @Composable
 fun LoginScreen(
-    isLoading: Boolean,
     errorMessage: String?,
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -45,12 +43,8 @@ fun LoginScreen(
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
-        if (isLoading) {
-            CircularProgressIndicator()
-        } else {
-            Button(onClick = onLoginClick) {
-                Text(stringResource(R.string.login_button))
-            }
+        Button(onClick = onLoginClick) {
+            Text(stringResource(R.string.login_button))
         }
 
         if (!errorMessage.isNullOrEmpty()) {
