@@ -48,12 +48,21 @@ fun UserProfile(
     val followingCount = user.followedUsers?.size ?: 0
 
     val ratingModes = listOf(
-        RatingMode("bullet", R.string.bullet, Icons.Default.FlashOn, ratingsMap["bullet"] ?: 1000),
-        RatingMode("blitz", R.string.blitz, Icons.Default.Speed, ratingsMap["blitz"] ?: 1000),
-        RatingMode("rapid", R.string.rapid, Icons.Default.RocketLaunch, ratingsMap["rapid"] ?: 1000),
+        RatingMode("bullet", R.string.bullet, Icons.Default.FlashOn, ratingsMap["bullet"] ?: 400),
+        RatingMode("blitz", R.string.blitz, Icons.Default.Speed, ratingsMap["blitz"] ?: 400),
+        RatingMode(
+            "rapid",
+            R.string.rapid,
+            Icons.Default.RocketLaunch,
+            ratingsMap["rapid"] ?: 400
+        ),
     )
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             if (user.imageUrl != null) {
                 AsyncImage(
@@ -100,7 +109,11 @@ fun UserProfile(
                 onClick = onEditProfileClick,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Icon(Icons.Default.Edit, contentDescription = null, modifier = Modifier.padding(end = 4.dp))
+                Icon(
+                    Icons.Default.Edit,
+                    contentDescription = null,
+                    modifier = Modifier.padding(end = 4.dp)
+                )
                 Text(stringResource(R.string.edit_profile))
             }
         }

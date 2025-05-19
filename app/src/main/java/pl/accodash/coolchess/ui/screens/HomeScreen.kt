@@ -16,24 +16,12 @@ fun HomeScreen(
     onFollowersClick: () -> Unit = {},
     onFollowingClick: () -> Unit = {}
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.hello_heading),
-            style = MaterialTheme.typography.headlineLarge,
-            modifier = Modifier.padding(bottom = 24.dp)
-        )
-
-        UserProfile(
-            user = user,
-            showEditButton = true,
-            onEditProfileClick = onEditProfileClick,
-            onFollowersClick = onFollowersClick,
-            onFollowingClick = onFollowingClick
-        )
-    }
+    UserProfile(
+        user = user,
+        showEditButton = true,
+        onEditProfileClick = onEditProfileClick,
+        onFollowersClick = onFollowersClick,
+        onFollowingClick = onFollowingClick
+    )
 }
 

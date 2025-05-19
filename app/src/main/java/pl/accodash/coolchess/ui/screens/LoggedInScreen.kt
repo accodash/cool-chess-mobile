@@ -24,12 +24,23 @@ enum class BottomNavItem(@StringRes val label: Int, val icon: ImageVector) {
     More(R.string.more, Icons.Filled.MoreHoriz)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoggedInScreen(user: User, modifier: Modifier = Modifier) {
     var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(selectedTab.label),
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
+            )
+        },
         bottomBar = {
             NavigationBar {
                 BottomNavItem.entries.forEach { item ->
