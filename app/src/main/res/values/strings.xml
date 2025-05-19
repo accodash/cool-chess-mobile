@@ -4,12 +4,13 @@
     <string name="unknown">Unknown</string>
     <string name="failed_to_load">Failed to load</string>
 
-    <!--  Tabs  -->
+    <!--  Screens  -->
     <string name="home">Home</string>
     <string name="history">History</string>
     <string name="ranking">Ranking</string>
     <string name="social">Social</string>
     <string name="more">More</string>
+    <string name="user_profile">User profile</string>
 
     <!--  Pagination  -->
     <string name="previous_page">Previous page</string>

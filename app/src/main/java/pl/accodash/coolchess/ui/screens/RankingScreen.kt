@@ -23,7 +23,8 @@ private const val LIMIT = 50
 @Composable
 fun RankingScreen(
     services: CoolChessServices,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onUserClick: (String) -> Unit
 ) {
     var mode by rememberSaveable { mutableStateOf("bullet") }
     var page by rememberSaveable { mutableStateOf(1) }
@@ -94,9 +95,7 @@ fun RankingScreen(
                                         followersCount = user.followersCount,
                                         uuid = user.uuid,
                                         elo = entry.rating,
-                                        onClick = { uuid ->
-                                            println("Navigate to /social/user/$uuid")
-                                        }
+                                        onClick = onUserClick
                                     )
                                 }
                             }
