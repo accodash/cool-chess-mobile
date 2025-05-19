@@ -8,12 +8,14 @@ import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import pl.accodash.coolchess.R
+import pl.accodash.coolchess.api.CoolChessServices
 import pl.accodash.coolchess.api.models.User
 
 enum class BottomNavItem(@StringRes val label: Int, val icon: ImageVector) {
@@ -26,8 +28,12 @@ enum class BottomNavItem(@StringRes val label: Int, val icon: ImageVector) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoggedInScreen(user: User, modifier: Modifier = Modifier) {
-    var selectedTab by remember { mutableStateOf(BottomNavItem.Home) }
+fun LoggedInScreen(
+    user: User,
+    services: CoolChessServices,
+    modifier: Modifier = Modifier
+) {
+    var selectedTab by rememberSaveable { mutableStateOf(BottomNavItem.Home) }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -58,10 +64,10 @@ fun LoggedInScreen(user: User, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
         ) {
             when (selectedTab) {
                 BottomNavItem.Home -> HomeScreen(user = user)
+                BottomNavItem.Ranking -> RankingScreen(services = services)
                 else -> {
                     Box(
                         modifier = Modifier

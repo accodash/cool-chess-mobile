@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Cool Chess</string>
     <string name="unknown_error">Unknown error</string>
+    <string name="unknown">Unknown</string>
+    <string name="failed_to_load">Failed to load</string>
 
     <!--  Tabs  -->
     <string name="home">Home</string>
@@ -8,6 +10,10 @@
     <string name="ranking">Ranking</string>
     <string name="social">Social</string>
     <string name="more">More</string>
+
+    <!--  Pagination  -->
+    <string name="previous_page">Previous page</string>
+    <string name="next_page">Next page</string>
 
     <!--  Login Screen  -->
     <string name="login_button">Login with Auth0</string>
