@@ -86,6 +86,7 @@ fun UserProfileScreen(
                 CircularProgressIndicator()
             }
         }
+
         isError -> {
             Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
@@ -94,17 +95,37 @@ fun UserProfileScreen(
                 )
             }
         }
+
         user != null -> {
             val ratingsMap = remember(user) {
                 user!!.ratings?.associate { it.mode to it.rating } ?: emptyMap()
             }
-            val followersCount = user!!.followersCount ?: user!!.followers?.size ?: 0
-            val followingCount = user!!.followedUsers?.size ?: 0
+            val followersCount by remember {
+                mutableIntStateOf(
+                    user!!.followersCount ?: user!!.followers?.size ?: 0
+                )
+            }
+            var followingCount by remember { mutableIntStateOf(user!!.followedUsers?.size ?: 0) }
 
             val ratingModes = listOf(
-                RatingMode("bullet", R.string.bullet, Icons.Default.FlashOn, ratingsMap["bullet"] ?: 400),
-                RatingMode("blitz", R.string.blitz, Icons.Default.Speed, ratingsMap["blitz"] ?: 400),
-                RatingMode("rapid", R.string.rapid, Icons.Default.RocketLaunch, ratingsMap["rapid"] ?: 400),
+                RatingMode(
+                    "bullet",
+                    R.string.bullet,
+                    Icons.Default.FlashOn,
+                    ratingsMap["bullet"] ?: 400
+                ),
+                RatingMode(
+                    "blitz",
+                    R.string.blitz,
+                    Icons.Default.Speed,
+                    ratingsMap["blitz"] ?: 400
+                ),
+                RatingMode(
+                    "rapid",
+                    R.string.rapid,
+                    Icons.Default.RocketLaunch,
+                    ratingsMap["rapid"] ?: 400
+                ),
             )
 
             Column(
@@ -145,10 +166,16 @@ fun UserProfileScreen(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Button(onClick = { onFollowersClick(uuid) }, modifier = Modifier.weight(1f)) {
+                    ElevatedButton(
+                        onClick = { onFollowersClick(uuid) },
+                        modifier = Modifier.weight(1f)
+                    ) {
                         Text("${stringResource(R.string.followers)}: $followersCount")
                     }
-                    Button(onClick = { onFollowingClick(uuid) }, modifier = Modifier.weight(1f)) {
+                    ElevatedButton(
+                        onClick = { onFollowingClick(uuid) },
+                        modifier = Modifier.weight(1f)
+                    ) {
                         Text("${stringResource(R.string.followings)}: $followingCount")
                     }
                 }
@@ -170,24 +197,32 @@ fun UserProfileScreen(
 
                 if (currentUser != null && currentUser!!.uuid != user?.uuid) {
                     Spacer(modifier = Modifier.height(16.dp))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        FollowActionButtons(
+                            currentUserId = currentUser!!.uuid,
+                            targetUserId = user!!.uuid,
+                            followings = followings,
+                            followingService = services.followingService,
+                            onFollow = { followingCount++ },
+                            onUnfollow = { followingCount-- }
+                        )
 
-                    FollowActionButtons(
-                        currentUserId = currentUser!!.uuid,
-                        targetUserId = user!!.uuid,
-                        followings = followings,
-                        followingService = services.followingService
-                    )
+                        Spacer(modifier = Modifier.height(8.dp))
 
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    FriendActionButtons(
-                        currentUserId = currentUser!!.uuid,
-                        targetUserId = user!!.uuid,
-                        friends = friends,
-                        receivedRequests = receivedRequests,
-                        sentRequests = sentRequests,
-                        friendService = services.friendService
-                    )
+                        FriendActionButtons(
+                            currentUserId = currentUser!!.uuid,
+                            targetUserId = user!!.uuid,
+                            friends = friends,
+                            receivedRequests = receivedRequests,
+                            sentRequests = sentRequests,
+                            friendService = services.friendService
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(24.dp))

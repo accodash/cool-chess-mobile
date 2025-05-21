@@ -21,7 +21,9 @@ fun FollowActionButtons(
     currentUserId: String,
     targetUserId: String,
     followings: List<Following>,
-    followingService: FollowingService
+    followingService: FollowingService,
+    onFollow: () -> Unit = {},
+    onUnfollow: () -> Unit = {}
 ) {
     val scope = rememberCoroutineScope()
     var isFollowing by remember { mutableStateOf<Boolean>(false) }
@@ -42,6 +44,7 @@ fun FollowActionButtons(
                     isFollowing = false
                     loading = false
                 }
+                onUnfollow()
             },
             enabled = !loading
         ) {
@@ -56,6 +59,7 @@ fun FollowActionButtons(
                     isFollowing = true
                     loading = false
                 }
+                onFollow()
             },
             enabled = !loading
         ) {
