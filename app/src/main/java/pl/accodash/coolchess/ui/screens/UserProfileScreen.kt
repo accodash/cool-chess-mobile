@@ -100,12 +100,12 @@ fun UserProfileScreen(
             val ratingsMap = remember(user) {
                 user!!.ratings?.associate { it.mode to it.rating } ?: emptyMap()
             }
-            val followersCount by remember {
+            var followersCount by remember {
                 mutableIntStateOf(
                     user!!.followersCount ?: user!!.followers?.size ?: 0
                 )
             }
-            var followingCount by remember { mutableIntStateOf(user!!.followedUsers?.size ?: 0) }
+            val followingCount by remember { mutableIntStateOf(user!!.followedUsers?.size ?: 0) }
 
             val ratingModes = listOf(
                 RatingMode(
@@ -208,8 +208,8 @@ fun UserProfileScreen(
                             targetUserId = user!!.uuid,
                             followings = followings,
                             followingService = services.followingService,
-                            onFollow = { followingCount++ },
-                            onUnfollow = { followingCount-- }
+                            onFollow = { followersCount++ },
+                            onUnfollow = { followersCount-- }
                         )
 
                         Spacer(modifier = Modifier.height(8.dp))
