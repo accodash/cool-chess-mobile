@@ -108,7 +108,6 @@ fun LoggedInScreen(
             composable(Screens.Home.route) {
                 UserProfileScreen(
                     uuid = user.uuid,
-                    showEditButton = true,
                     onEditProfileClick = {},
                     onFollowersClick = {navController.navigate("${Screens.Followers.route}/$it")},
                     onFollowingClick = {navController.navigate("${Screens.Followings.route}/$it")},

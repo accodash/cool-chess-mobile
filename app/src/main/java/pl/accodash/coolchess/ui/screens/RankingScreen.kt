@@ -54,7 +54,9 @@ fun RankingScreen(
     val hasNextPage = ratings.size > LIMIT
     val entries = ratings.take(LIMIT)
 
-    Column(modifier = modifier.fillMaxSize().padding(16.dp)) {
+    Column(modifier = modifier
+        .fillMaxSize()
+        .padding(16.dp)) {
         ModeSelector(selectedMode = mode, onSelect = {
             mode = it
             page = 1
@@ -78,7 +80,7 @@ fun RankingScreen(
                 else -> {
                     if (entries.isEmpty()) {
                         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Text("No players found.")
+                            Text(stringResource(R.string.no_users_found))
                         }
                     } else {
                         LazyColumn(

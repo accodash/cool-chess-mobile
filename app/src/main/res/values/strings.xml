@@ -3,6 +3,7 @@
     <string name="unknown_error">Unknown error</string>
     <string name="unknown">Unknown</string>
     <string name="failed_to_load">Failed to load</string>
+    <string name="no_users_found">No users found</string>
 
     <!--  Screens  -->
     <string name="home">Home</string>
@@ -32,4 +33,13 @@
     <string name="rapid">Rapid</string>
     <string name="elo_rating">Elo Rating:</string>
     <string name="match">Match!</string>
+
+    <!--  Followings & Friends  -->
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="add_friend">Add friend</string>
+    <string name="remove_friend">Remove friend</string>
+    <string name="cancel_friend_request">Cancel request</string>
+    <string name="accept_friend_request">Accept request</string>
+    <string name="reject_friend_request">Reject</string>
 </resources>

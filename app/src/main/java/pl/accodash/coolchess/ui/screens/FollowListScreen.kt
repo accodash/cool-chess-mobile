@@ -17,7 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import pl.accodash.coolchess.R
 import pl.accodash.coolchess.api.CoolChessServices
 import pl.accodash.coolchess.api.models.Following
 import pl.accodash.coolchess.ui.components.UserCard
@@ -50,7 +52,7 @@ fun FollowListScreen(
         }
     } else if (followings.isEmpty()) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("No users found.")
+            Text(stringResource(R.string.no_users_found))
         }
     } else{
         LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {

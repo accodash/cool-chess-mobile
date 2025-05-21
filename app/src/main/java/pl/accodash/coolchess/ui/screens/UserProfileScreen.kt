@@ -27,6 +27,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import pl.accodash.coolchess.R
+import pl.accodash.coolchess.api.models.Following
+import pl.accodash.coolchess.api.models.FriendRelation
+import pl.accodash.coolchess.ui.components.FollowActionButtons
+import pl.accodash.coolchess.ui.components.FriendActionButtons
 
 data class RatingMode(
     val key: String,
@@ -40,14 +44,19 @@ fun UserProfileScreen(
     uuid: String,
     services: CoolChessServices,
     modifier: Modifier = Modifier,
-    showEditButton: Boolean = false,
     onEditProfileClick: () -> Unit = {},
     onFollowersClick: (String) -> Unit = {},
     onFollowingClick: (String) -> Unit = {}
 ) {
+    var currentUser by remember { mutableStateOf<User?>(null) }
     var user by remember { mutableStateOf<User?>(null) }
     var isLoading by remember { mutableStateOf(true) }
     var isError by remember { mutableStateOf(false) }
+
+    var friends by remember { mutableStateOf<List<FriendRelation>>(emptyList()) }
+    var receivedRequests by remember { mutableStateOf<List<FriendRelation>>(emptyList()) }
+    var sentRequests by remember { mutableStateOf<List<FriendRelation>>(emptyList()) }
+    var followings by remember { mutableStateOf<List<Following>>(emptyList()) }
 
     LaunchedEffect(uuid) {
         isLoading = true
@@ -61,6 +70,16 @@ fun UserProfileScreen(
         }
     }
 
+    LaunchedEffect(user) {
+        currentUser = services.userService.getCurrentUser()
+        if (user != null && currentUser?.uuid != uuid) {
+            friends = services.friendService.fetchFriends()
+            receivedRequests = services.friendService.fetchReceivedRequests()
+            sentRequests = services.friendService.fetchSentRequests()
+            followings = services.followingService.fetchFollowings(currentUser!!.uuid)
+        }
+    }
+
     when {
         isLoading -> {
             Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -70,7 +89,7 @@ fun UserProfileScreen(
         isError -> {
             Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = "Failed to load user.",
+                    text = stringResource(R.string.failed_to_load),
                     color = MaterialTheme.colorScheme.error
                 )
             }
@@ -134,7 +153,7 @@ fun UserProfileScreen(
                     }
                 }
 
-                if (showEditButton) {
+                if (currentUser != null && currentUser!!.uuid == user?.uuid) {
                     Spacer(modifier = Modifier.height(12.dp))
                     OutlinedButton(
                         onClick = onEditProfileClick,
@@ -147,6 +166,28 @@ fun UserProfileScreen(
                         )
                         Text(stringResource(R.string.edit_profile))
                     }
+                }
+
+                if (currentUser != null && currentUser!!.uuid != user?.uuid) {
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FollowActionButtons(
+                        currentUserId = currentUser!!.uuid,
+                        targetUserId = user!!.uuid,
+                        followings = followings,
+                        followingService = services.followingService
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    FriendActionButtons(
+                        currentUserId = currentUser!!.uuid,
+                        targetUserId = user!!.uuid,
+                        friends = friends,
+                        receivedRequests = receivedRequests,
+                        sentRequests = sentRequests,
+                        friendService = services.friendService
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(24.dp))
