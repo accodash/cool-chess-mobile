@@ -10,8 +10,8 @@ data class User(
     val imageUrl: String?,
     val followersCount: Int? = null,
     val ratings: List<Rating>? = null,
-    @SerializedName("followed_users") val followedUsers: List<String>? = null,
-    val followers: List<String>? = null
+    @SerializedName("followed_users") val followedUsers: List<User>? = null,
+    val followers: List<User>? = null
 ) {
     fun getBackendImageUrl(): String? =
         imageUrl?.replace(

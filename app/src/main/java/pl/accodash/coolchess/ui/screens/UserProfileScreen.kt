@@ -39,11 +39,11 @@ data class RatingMode(
 fun UserProfileScreen(
     uuid: String,
     services: CoolChessServices,
+    modifier: Modifier = Modifier,
     showEditButton: Boolean = false,
     onEditProfileClick: () -> Unit = {},
-    onFollowersClick: () -> Unit = {},
-    onFollowingClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    onFollowersClick: (String) -> Unit = {},
+    onFollowingClick: (String) -> Unit = {}
 ) {
     var user by remember { mutableStateOf<User?>(null) }
     var isLoading by remember { mutableStateOf(true) }
@@ -126,11 +126,11 @@ fun UserProfileScreen(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Button(onClick = onFollowersClick, modifier = Modifier.weight(1f)) {
+                    Button(onClick = { onFollowersClick(uuid) }, modifier = Modifier.weight(1f)) {
                         Text("${stringResource(R.string.followers)}: $followersCount")
                     }
-                    Button(onClick = onFollowingClick, modifier = Modifier.weight(1f)) {
-                        Text("${stringResource(R.string.following)}: $followingCount")
+                    Button(onClick = { onFollowingClick(uuid) }, modifier = Modifier.weight(1f)) {
+                        Text("${stringResource(R.string.followings)}: $followingCount")
                     }
                 }
 

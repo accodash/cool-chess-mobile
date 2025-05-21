@@ -32,6 +32,8 @@ enum class Screens(
     Social(R.string.social, "social", Icons.Filled.EmojiPeople),
     More(R.string.more, "more", Icons.Filled.MoreHoriz),
     UserProfile(R.string.user_profile, "user"),
+    Followers(R.string.followers, "followers"),
+    Followings(R.string.followings, "followings"),
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -108,8 +110,8 @@ fun LoggedInScreen(
                     uuid = user.uuid,
                     showEditButton = true,
                     onEditProfileClick = {},
-                    onFollowersClick = {},
-                    onFollowingClick = {},
+                    onFollowersClick = {navController.navigate("${Screens.Followers.route}/$it")},
+                    onFollowingClick = {navController.navigate("${Screens.Followings.route}/$it")},
                     services = services
                 )
             }
@@ -118,7 +120,7 @@ fun LoggedInScreen(
                     services = services,
                     modifier = Modifier.fillMaxSize(),
                     onUserClick = { uuid ->
-                        navController.navigate("user/$uuid")
+                        navController.navigate("${Screens.UserProfile.route}/$uuid")
                     }
                 )
             }
@@ -132,11 +134,32 @@ fun LoggedInScreen(
 
             }
             composable(
-                "${Screens.UserProfile.route}/{uuid}",
-                arguments = listOf(navArgument("uuid") { type = NavType.StringType })
-            ) { backStackEntry ->
-                val uuid = backStackEntry.arguments?.getString("uuid") ?: ""
-                UserProfileScreen(uuid = uuid, services = services)
+                "${Screens.UserProfile.route}/{uuid}"
+            ) { route ->
+                UserProfileScreen(
+                    uuid = route.arguments?.getString("uuid") ?: "",
+                    services = services,
+                    onFollowersClick = {navController.navigate("${Screens.Followers.route}/$it")},
+                    onFollowingClick = {navController.navigate("${Screens.Followings.route}/$it")}
+                )
+            }
+            composable("${Screens.Followers.route}/{uuid}") {
+                FollowListScreen(
+                    uuid = it.arguments?.getString("uuid") ?: "",
+                    isFollowers = true,
+                    services = services
+                ) { uuid ->
+                    navController.navigate("user/$uuid")
+                }
+            }
+            composable("${Screens.Followings.route}/{uuid}") {
+                FollowListScreen(
+                    uuid = it.arguments?.getString("uuid") ?: "",
+                    isFollowers = false,
+                    services = services
+                ) { uuid ->
+                    navController.navigate("user/$uuid")
+                }
             }
         }
     }

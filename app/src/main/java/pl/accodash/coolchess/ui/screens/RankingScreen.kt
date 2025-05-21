@@ -91,7 +91,7 @@ fun RankingScreen(
                                         index = offset + index + 1,
                                         username = user.username,
                                         createdAt = user.createdAt,
-                                        imageUrl = user.imageUrl,
+                                        imageUrl = user.getBackendImageUrl(),
                                         followersCount = user.followersCount,
                                         uuid = user.uuid,
                                         elo = entry.rating,

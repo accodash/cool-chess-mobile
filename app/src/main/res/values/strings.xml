@@ -11,6 +11,8 @@
     <string name="social">Social</string>
     <string name="more">More</string>
     <string name="user_profile">User profile</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Followings</string>
 
     <!--  Pagination  -->
     <string name="previous_page">Previous page</string>
@@ -24,8 +26,6 @@
 
     <!--  Logged screen  -->
     <string name="hello_heading">Hello!</string>
-    <string name="followers">Followers</string>
-    <string name="following">Following</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="bullet">Bullet</string>
     <string name="blitz">Blitz</string>
