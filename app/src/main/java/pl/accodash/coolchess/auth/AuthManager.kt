@@ -44,6 +44,23 @@ class AuthManager(context: Context) {
         }
     }
 
+    suspend fun logout(context: Context): Unit {
+        return suspendCancellableCoroutine { cont ->
+            WebAuthProvider.logout(account)
+                .withScheme("demo")
+                .start(context, object : Callback<Void?, AuthenticationException> {
+                    override fun onSuccess(result: Void?) {
+                        credentialsManager.clearCredentials()
+                        cont.resume(Unit)
+                    }
+
+                    override fun onFailure(error: AuthenticationException) {
+                        cont.resumeWithException(error)
+                    }
+                })
+        }
+    }
+
     suspend fun getSavedCredentials(): Credentials? {
         return suspendCancellableCoroutine { cont ->
             credentialsManager.getCredentials(object : Callback<Credentials, CredentialsManagerException> {
@@ -59,6 +76,5 @@ class AuthManager(context: Context) {
     }
 
     fun hasSavedCredentials(): Boolean = credentialsManager.hasValidCredentials()
-    fun clearCredentials() = credentialsManager.clearCredentials()
 }
 

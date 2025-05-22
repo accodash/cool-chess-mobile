@@ -1,6 +1,7 @@
 package pl.accodash.coolchess.ui.screens
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +30,7 @@ import kotlinx.coroutines.launch
 import pl.accodash.coolchess.R
 import pl.accodash.coolchess.api.CoolChessServices
 import pl.accodash.coolchess.api.models.FriendRelation
+import pl.accodash.coolchess.ui.components.AllUsersList
 import pl.accodash.coolchess.ui.components.NoUsersFound
 import pl.accodash.coolchess.ui.components.UserCard
 
@@ -91,7 +93,8 @@ fun SocialScreen(
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
-                            .fillMaxWidth()
+                            .fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         itemsIndexed(friends) { index, relation ->
                             val user =
@@ -118,7 +121,8 @@ fun SocialScreen(
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
-                            .fillMaxWidth()
+                            .fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         itemsIndexed(receivedRequests) { index, relation ->
                             val user = relation.firstUser
@@ -162,7 +166,8 @@ fun SocialScreen(
                     LazyColumn(
                         modifier = Modifier
                             .weight(1f)
-                            .fillMaxWidth()
+                            .fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         itemsIndexed(sentRequests) { index, relation ->
                             val user = relation.secondUser
@@ -192,7 +197,7 @@ fun SocialScreen(
             }
 
             SocialTabs.AllUsers -> {
-//                    Text("All Users")
+                AllUsersList(userService = services.userService, onUserClick = onUserClick)
             }
         }
     }

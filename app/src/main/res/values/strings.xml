@@ -48,4 +48,10 @@
     <string name="sent_friend_requests">Sent requests</string>
     <string name="received_friend_requests">Received requests</string>
     <string name="all_users">All users</string>
+    <string name="search">Search</string>
+    <string name="sort_by">Sort by</string>
+    <string name="created_at_newest">Newest</string>
+    <string name="created_at_oldest">Oldest</string>
+    <string name="alphabetically_az">Name (A-Z)</string>
+    <string name="alphabetically_za">Name (Z-A)</string>
 </resources>
