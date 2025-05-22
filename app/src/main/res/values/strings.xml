@@ -42,4 +42,10 @@
     <string name="cancel_friend_request">Cancel request</string>
     <string name="accept_friend_request">Accept request</string>
     <string name="reject_friend_request">Reject</string>
+
+    <!--  Social Screen  -->
+    <string name="friends">Friends</string>
+    <string name="sent_friend_requests">Sent requests</string>
+    <string name="received_friend_requests">Received requests</string>
+    <string name="all_users">All users</string>
 </resources>

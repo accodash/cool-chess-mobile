@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import pl.accodash.coolchess.R
 import pl.accodash.coolchess.api.CoolChessServices
 import pl.accodash.coolchess.api.models.Following
+import pl.accodash.coolchess.ui.components.NoUsersFound
 import pl.accodash.coolchess.ui.components.UserCard
 
 @Composable
@@ -51,9 +52,7 @@ fun FollowListScreen(
             CircularProgressIndicator()
         }
     } else if (followings.isEmpty()) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text(stringResource(R.string.no_users_found))
-        }
+        NoUsersFound()
     } else{
         LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
             itemsIndexed(followings) { index, following ->

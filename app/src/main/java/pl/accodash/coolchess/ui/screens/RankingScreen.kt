@@ -16,6 +16,7 @@ import pl.accodash.coolchess.api.CoolChessServices
 import pl.accodash.coolchess.api.models.Rating
 import pl.accodash.coolchess.ui.components.PaginationControls
 import pl.accodash.coolchess.ui.components.ModeSelector
+import pl.accodash.coolchess.ui.components.NoUsersFound
 import pl.accodash.coolchess.ui.components.UserCard
 
 private const val LIMIT = 50
@@ -79,9 +80,7 @@ fun RankingScreen(
 
                 else -> {
                     if (entries.isEmpty()) {
-                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Text(stringResource(R.string.no_users_found))
-                        }
+                        NoUsersFound()
                     } else {
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),

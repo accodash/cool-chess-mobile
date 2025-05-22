@@ -127,7 +127,13 @@ fun LoggedInScreen(
 
             }
             composable(Screens.Social.route) {
-
+                SocialScreen(
+                    currentUuid = user.uuid,
+                    services = services,
+                    onUserClick = { uuid ->
+                        navController.navigate("${Screens.UserProfile.route}/$uuid")
+                    }
+                )
             }
             composable(Screens.More.route) {
 
