@@ -54,4 +54,7 @@
     <string name="created_at_oldest">Oldest</string>
     <string name="alphabetically_az">Name (A-Z)</string>
     <string name="alphabetically_za">Name (Z-A)</string>
+
+    <!--  More Screen  -->
+    <string name="logout">Log out</string>
 </resources>
