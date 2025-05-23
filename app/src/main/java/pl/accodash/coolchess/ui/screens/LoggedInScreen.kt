@@ -41,7 +41,8 @@ enum class Screens(
 fun LoggedInScreen(
     user: User,
     services: CoolChessServices,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onLogout: () -> Unit = {},
 ) {
     val navController = rememberNavController()
     var selectedTab by rememberSaveable { mutableStateOf(Screens.Home) }
@@ -136,7 +137,7 @@ fun LoggedInScreen(
                 )
             }
             composable(Screens.More.route) {
-
+                MoreScreen(onLogout = onLogout)
             }
             composable(
                 "${Screens.UserProfile.route}/{uuid}"
