@@ -62,4 +62,6 @@
 
     <!--  More Screen  -->
     <string name="logout">Log out</string>
+    <string name="theme">Theme</string>
+    <string name="color_scheme">Color scheme</string>
 </resources>

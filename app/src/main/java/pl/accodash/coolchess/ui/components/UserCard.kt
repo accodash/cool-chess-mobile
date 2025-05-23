@@ -36,6 +36,9 @@ fun UserCard(
             .fillMaxWidth()
             .clickable { onClick(uuid) },
         elevation = CardDefaults.cardElevation(3.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
+        )
     ) {
         Row(
             modifier = Modifier

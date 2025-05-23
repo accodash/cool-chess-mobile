@@ -96,7 +96,12 @@ fun LoggedInScreen(
                                         contentDescription = stringResource(item.label)
                                     )
                                 },
-                                label = { Text(stringResource(item.label)) }
+                                label = { Text(stringResource(item.label)) },
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = MaterialTheme.colorScheme.tertiary,
+                                    selectedTextColor = MaterialTheme.colorScheme.tertiary,
+                                    indicatorColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f)
+                                )
                             )
                         }
                 }

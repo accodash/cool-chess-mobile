@@ -1,6 +1,7 @@
 package pl.accodash.coolchess.ui.screens
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -54,7 +55,7 @@ fun FollowListScreen(
     } else if (followings.isEmpty()) {
         NoUsersFound()
     } else{
-        LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+        LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(16.dp)) {
             itemsIndexed(followings) { index, following ->
                 val user = if (isFollowers) following.follower else following.followedUser
                 user?.let {

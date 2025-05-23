@@ -1,6 +1,7 @@
 package pl.accodash.coolchess.ui.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 fun MoreOption(
     icon: ImageVector,
     label: String,
+    caption: String? = null,
     onClick: () -> Unit
 ) {
     Row(
@@ -35,6 +37,11 @@ fun MoreOption(
             modifier = Modifier.size(24.dp)
         )
         Spacer(modifier = Modifier.width(16.dp))
-        Text(text = label, style = MaterialTheme.typography.bodyLarge)
+        Column {
+            Text(text = label, style = MaterialTheme.typography.bodyLarge)
+            if (caption != null ) {
+                Text(text = caption, style = MaterialTheme.typography.bodySmall)
+            }
+        }
     }
 }

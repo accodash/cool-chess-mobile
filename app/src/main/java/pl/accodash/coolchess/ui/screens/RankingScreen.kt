@@ -84,7 +84,8 @@ fun RankingScreen(
                     } else {
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            contentPadding = PaddingValues(top = 4.dp)
                         ) {
                             itemsIndexed(entries) { index, entry ->
                                 entry.user?.let { user ->

@@ -3,6 +3,7 @@ package pl.accodash.coolchess.ui.screens
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -94,7 +95,8 @@ fun SocialScreen(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(top = 4.dp)
                     ) {
                         itemsIndexed(friends) { index, relation ->
                             val user =
@@ -122,7 +124,8 @@ fun SocialScreen(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(top = 4.dp)
                     ) {
                         itemsIndexed(receivedRequests) { index, relation ->
                             val user = relation.firstUser
@@ -167,7 +170,8 @@ fun SocialScreen(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(top = 4.dp)
                     ) {
                         itemsIndexed(sentRequests) { index, relation ->
                             val user = relation.secondUser
