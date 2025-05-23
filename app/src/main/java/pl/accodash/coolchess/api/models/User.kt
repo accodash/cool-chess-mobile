@@ -15,7 +15,7 @@ data class User(
 ) {
     fun getBackendImageUrl(): String? =
         imageUrl?.replace(
-            "http://localhost",
+            BuildConfig.IMAGE_URLS_PREFIX,
             BuildConfig.BACKEND_URL.removeSuffix("/").replace(Regex(":\\d+"), "")
         )
 }

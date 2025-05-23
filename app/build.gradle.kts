@@ -32,6 +32,7 @@ android {
         buildConfigField("String", "AUTH0_CLIENT_ID", "\"${localProperties["auth0ClientId"]}\"")
         buildConfigField("String", "AUTH0_AUDIENCE", "\"${localProperties["auth0Audience"]}\"")
         buildConfigField("String", "BACKEND_URL", "\"${localProperties["backendUrl"]}\"")
+        buildConfigField("String", "IMAGE_URLS_PREFIX", "\"${localProperties["imageUrlsPrefix"]}\"")
     }
 
     buildTypes {
