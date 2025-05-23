@@ -1,5 +1,6 @@
 package pl.accodash.coolchess.ui.screens
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -32,6 +33,7 @@ enum class Screens(
     Social(R.string.social, "social", Icons.Filled.EmojiPeople),
     More(R.string.more, "more", Icons.Filled.MoreHoriz),
     UserProfile(R.string.user_profile, "user"),
+    EditProfile(R.string.edit_profile, "edit_profile"),
     Followers(R.string.followers, "followers"),
     Followings(R.string.followings, "followings"),
 }
@@ -109,9 +111,9 @@ fun LoggedInScreen(
             composable(Screens.Home.route) {
                 UserProfileScreen(
                     uuid = user.uuid,
-                    onEditProfileClick = {},
-                    onFollowersClick = {navController.navigate("${Screens.Followers.route}/$it")},
-                    onFollowingClick = {navController.navigate("${Screens.Followings.route}/$it")},
+                    onEditProfileClick = { navController.navigate(Screens.EditProfile.route) },
+                    onFollowersClick = { navController.navigate("${Screens.Followers.route}/$it") },
+                    onFollowingClick = { navController.navigate("${Screens.Followings.route}/$it") },
                     services = services
                 )
             }
@@ -139,14 +141,18 @@ fun LoggedInScreen(
             composable(Screens.More.route) {
                 MoreScreen(onLogout = onLogout)
             }
-            composable(
-                "${Screens.UserProfile.route}/{uuid}"
-            ) { route ->
+            composable("${Screens.UserProfile.route}/{uuid}") { route ->
                 UserProfileScreen(
                     uuid = route.arguments?.getString("uuid") ?: "",
                     services = services,
-                    onFollowersClick = {navController.navigate("${Screens.Followers.route}/$it")},
-                    onFollowingClick = {navController.navigate("${Screens.Followings.route}/$it")}
+                    onFollowersClick = { navController.navigate("${Screens.Followers.route}/$it") },
+                    onFollowingClick = { navController.navigate("${Screens.Followings.route}/$it") }
+                )
+            }
+            composable(Screens.EditProfile.route) {
+                EditProfileScreen(
+                    services = services,
+                    onProfileUpdated = { navController.navigateUp() }
                 )
             }
             composable("${Screens.Followers.route}/{uuid}") {
@@ -155,7 +161,7 @@ fun LoggedInScreen(
                     isFollowers = true,
                     services = services
                 ) { uuid ->
-                    navController.navigate("user/$uuid")
+                    navController.navigate("${Screens.UserProfile.route}/$uuid")
                 }
             }
             composable("${Screens.Followings.route}/{uuid}") {
@@ -164,7 +170,7 @@ fun LoggedInScreen(
                     isFollowers = false,
                     services = services
                 ) { uuid ->
-                    navController.navigate("user/$uuid")
+                    navController.navigate("${Screens.UserProfile.route}/$uuid")
                 }
             }
         }
