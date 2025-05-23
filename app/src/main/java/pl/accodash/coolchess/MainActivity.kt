@@ -25,7 +25,12 @@ class MainActivity : ComponentActivity() {
             runOnUiThread {
                 setContent {
                     CoolChessThemeWrapper {
-                        CoolChessApp()
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = MaterialTheme.colorScheme.background
+                        ) {
+                            CoolChessApp()
+                        }
                     }
                 }
             }
