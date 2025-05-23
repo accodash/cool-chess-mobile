@@ -1,3 +1,57 @@
 <resources>
     <string name="app_name">Cool Chess</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="unknown">Unknown</string>
+    <string name="failed_to_load">Failed to load</string>
+    <string name="no_users_found">No users found</string>
+
+    <!--  Screens  -->
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="ranking">Ranking</string>
+    <string name="social">Social</string>
+    <string name="more">More</string>
+    <string name="user_profile">User profile</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Followings</string>
+
+    <!--  Pagination  -->
+    <string name="previous_page">Previous page</string>
+    <string name="next_page">Next page</string>
+
+    <!--  Login Screen  -->
+    <string name="login_button">Login with Auth0</string>
+    <string name="login_header">Welcome to Cool Chess</string>
+    <string name="login_caption">You have to log in to continue using our mobile app</string>
+    <string name="loading">Loading…</string>
+
+    <!--  Logged screen  -->
+    <string name="hello_heading">Hello!</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="bullet">Bullet</string>
+    <string name="blitz">Blitz</string>
+    <string name="rapid">Rapid</string>
+    <string name="elo_rating">Elo Rating:</string>
+    <string name="match">Match!</string>
+
+    <!--  Followings & Friends  -->
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="add_friend">Add friend</string>
+    <string name="remove_friend">Remove friend</string>
+    <string name="cancel_friend_request">Cancel request</string>
+    <string name="accept_friend_request">Accept request</string>
+    <string name="reject_friend_request">Reject</string>
+
+    <!--  Social Screen  -->
+    <string name="friends">Friends</string>
+    <string name="sent_friend_requests">Sent requests</string>
+    <string name="received_friend_requests">Received requests</string>
+    <string name="all_users">All users</string>
+    <string name="search">Search</string>
+    <string name="sort_by">Sort by</string>
+    <string name="created_at_newest">Newest</string>
+    <string name="created_at_oldest">Oldest</string>
+    <string name="alphabetically_az">Name (A-Z)</string>
+    <string name="alphabetically_za">Name (Z-A)</string>
 </resources>
