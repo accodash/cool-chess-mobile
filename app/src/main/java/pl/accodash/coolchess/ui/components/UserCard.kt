@@ -73,9 +73,8 @@ fun UserCard(
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = username, style = MaterialTheme.typography.titleMedium)
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier.padding(top = 4.dp)
                 ) {
                     Text(
