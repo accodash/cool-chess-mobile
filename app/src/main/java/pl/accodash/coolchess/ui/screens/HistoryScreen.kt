@@ -33,7 +33,8 @@ import pl.accodash.coolchess.ui.components.PaginationControls
 @Composable
 fun HistoryScreen(
     services: CoolChessServices,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onMatchCardClick: (String) -> Unit = {}
 ) {
     var page by rememberSaveable { mutableIntStateOf(1) }
     val limit = 10
@@ -88,7 +89,7 @@ fun HistoryScreen(
                     contentPadding = PaddingValues(16.dp)
                 ) {
                     items(currentMatches) { match ->
-                        MatchCard(match = match, currentUserId = currentUserId)
+                        MatchCard(match = match, currentUserId = currentUserId, onClick = onMatchCardClick)
                     }
                 }
 

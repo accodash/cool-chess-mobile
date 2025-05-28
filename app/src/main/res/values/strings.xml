@@ -9,6 +9,7 @@
     <!--  Screens  -->
     <string name="home">Home</string>
     <string name="history">History</string>
+    <string name="move_history">Move history</string>
     <string name="ranking">Ranking</string>
     <string name="social">Social</string>
     <string name="more">More</string>

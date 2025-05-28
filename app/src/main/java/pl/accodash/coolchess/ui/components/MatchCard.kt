@@ -48,7 +48,7 @@ fun MatchCard(
     currentUserId: String?,
     modifier: Modifier = Modifier,
     isStatic: Boolean = false,
-    onClick: (() -> Unit)? = null
+    onClick: (String) -> Unit = { }
 ) {
     val invalidDateString = stringResource(R.string.invalid)
     val formattedDate = remember(match.startAt) {
@@ -97,16 +97,17 @@ fun MatchCard(
         modifier = modifier
             .fillMaxWidth()
             .clickable {
-                if (onClick != null) {
-                    onClick()
-                }
+                onClick(match.id)
             },
         elevation = CardDefaults.cardElevation(3.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer
         )
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            horizontalAlignment = if (isStatic) Alignment.CenterHorizontally else Alignment.Start
+        ) {
             Text(
                 formattedDate,
                 style = MaterialTheme.typography.bodySmall,
@@ -138,7 +139,12 @@ fun MatchCard(
                 )
             }
 
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(
+                horizontalArrangement = if (isStatic) Arrangement.spacedBy(
+                    8.dp,
+                    Alignment.CenterHorizontally
+                ) else Arrangement.spacedBy(8.dp)
+            ) {
                 AssistChip(
                     onClick = {},
                     label = { Text(mode) },

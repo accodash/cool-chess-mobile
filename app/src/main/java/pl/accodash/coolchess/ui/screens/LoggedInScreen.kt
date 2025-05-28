@@ -36,6 +36,7 @@ enum class Screens(
     EditProfile(R.string.edit_profile, "edit_profile"),
     Followers(R.string.followers, "followers"),
     Followings(R.string.followings, "followings"),
+    MatchHistory(R.string.move_history, "match_history"),
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -132,7 +133,9 @@ fun LoggedInScreen(
                 )
             }
             composable(Screens.History.route) {
-                HistoryScreen(services = services)
+                HistoryScreen(services = services, onMatchCardClick = {
+                    navController.navigate("${Screens.MatchHistory.route}/$it")
+                })
             }
             composable(Screens.Social.route) {
                 SocialScreen(
@@ -177,6 +180,11 @@ fun LoggedInScreen(
                 ) { uuid ->
                     navController.navigate("${Screens.UserProfile.route}/$uuid")
                 }
+            }
+            composable("${Screens.MatchHistory.route}/{id}") {
+                MatchHistoryScreen(
+                    matchId = it.arguments?.getString("id") ?: "", services = services
+                )
             }
         }
     }
