@@ -4,6 +4,7 @@
     <string name="unknown">Unknown</string>
     <string name="failed_to_load">Failed to load</string>
     <string name="no_users_found">No users found</string>
+    <string name="invalid">Invalid</string>
 
     <!--  Screens  -->
     <string name="home">Home</string>
@@ -26,13 +27,21 @@
     <string name="login_caption">You have to log in to continue using our mobile app</string>
     <string name="loading">Loading…</string>
 
-    <!--  Logged screen  -->
+    <!--  Profile screen  -->
     <string name="hello_heading">Hello!</string>
+    <string name="elo_rating">Elo Rating:</string>
+    <string name="match">Match!</string>
+
+    <!--  Game History  -->
     <string name="bullet">Bullet</string>
     <string name="blitz">Blitz</string>
     <string name="rapid">Rapid</string>
-    <string name="elo_rating">Elo Rating:</string>
-    <string name="match">Match!</string>
+    <string name="won">WON</string>
+    <string name="lost">LOST</string>
+    <string name="draw">DRAW</string>
+    <string name="ongoing">ONGOING</string>
+    <string name="ranked">Ranked</string>
+    <string name="unranked">Unranked</string>
 
     <!--  Followings & Friends  -->
     <string name="follow">Follow</string>

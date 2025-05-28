@@ -57,7 +57,7 @@ fun RankingScreen(
 
     Column(modifier = modifier
         .fillMaxSize()
-        .padding(16.dp)) {
+    ) {
         ModeSelector(selectedMode = mode, onSelect = {
             mode = it
             page = 1
@@ -85,7 +85,7 @@ fun RankingScreen(
                         LazyColumn(
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.spacedBy(8.dp),
-                            contentPadding = PaddingValues(top = 4.dp)
+                            contentPadding = PaddingValues(top = 16.dp)
                         ) {
                             itemsIndexed(entries) { index, entry ->
                                 entry.user?.let { user ->

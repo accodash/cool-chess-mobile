@@ -132,7 +132,7 @@ fun LoggedInScreen(
                 )
             }
             composable(Screens.History.route) {
-
+                HistoryScreen(services = services)
             }
             composable(Screens.Social.route) {
                 SocialScreen(
