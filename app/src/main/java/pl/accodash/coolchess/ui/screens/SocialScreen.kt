@@ -96,7 +96,7 @@ fun SocialScreen(
                             .weight(1f)
                             .fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
-                        contentPadding = PaddingValues(top = 4.dp)
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         itemsIndexed(friends) { index, relation ->
                             val user =
@@ -125,7 +125,7 @@ fun SocialScreen(
                             .weight(1f)
                             .fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
-                        contentPadding = PaddingValues(top = 4.dp)
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         itemsIndexed(receivedRequests) { index, relation ->
                             val user = relation.firstUser
@@ -171,7 +171,7 @@ fun SocialScreen(
                             .weight(1f)
                             .fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
-                        contentPadding = PaddingValues(top = 4.dp)
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         itemsIndexed(sentRequests) { index, relation ->
                             val user = relation.secondUser
