@@ -34,6 +34,30 @@ backendUrl=BACKEND_URL_WITH_PORT (example: http://192.168.91.242:8000/)
 imageUrlsPrefix=http://localhost
 ```
 
+### ✨ Navigation Scheme
+
+> On the first start of the app, user needs to log in or sign up on our Auth0 service.<br>The screen he sees only contains welcome words and a button that opens browser window with Auth0.
+
+These bullets are accessible from the bottom bar after logging in:
+
+- **Home** – displays current user's profile and stats
+  - **Followers** (through Followers button) – displays current user's followers in a list
+  - **Followings** (through Followings button) – displays current user's followed users in a list
+  - **Edit profile** (through Edit profile button) – allows to update current user's profile (for new image to be displayed, restart is required)
+- **History** – displays matches that were played by current user
+  - **Move history** (through Match card) – allows analytics of moves played
+- **Ranking** – displays users ranked by their ELO in each mode
+  - **User profile** (through User card) – displays selected user's profile and stats
+    - **Followers** (through Followers button) – displays selected user's followers in a list
+    - **Followings** (through Followings button) – displays selected user's followed users in a list
+    - **Edit profile** (through Edit profile button) – allows to update selected user's profile (for new image to be displayed, restart is required)
+- **Social** – displays 4 tabs: **Friends**, **Received requests** *(with options to either Accept or Reject each request)*, **Sent requests** *(with option to cancel each)*, **All users**
+  - **User profile** (through User card) – displays selected user's profile and stats
+    - **Followers** (through Followers button) – displays selected user's followers in a list
+    - **Followings** (through Followings button) – displays selected user's followed users in a list
+    - **Edit profile** (through Edit profile button) – allows to update selected user's profile (for new image to be displayed, restart is required)
+- **More** – allows to change the app's look or sign out
+
 ---
 
 ## Polish
@@ -67,3 +91,27 @@ auth0Audience=AUTH0_AUDIENCE
 backendUrl=BACKEND_URL_WITH_PORT (example: http://192.168.91.242:8000/)
 imageUrlsPrefix=http://localhost
 ```
+
+### ✨ Schemat Nawigacji
+
+> Przy pierwszym uruchomieniu aplikacji użytkownik musi się zalogować lub zarejestrować przez usługę Auth0.<br>Ekran powitalny zawiera jedynie przywitanie oraz przycisk otwierający przeglądarkę z logowaniem Auth0.
+
+Poniższe sekcje są dostępne z dolnego paska nawigacji po zalogowaniu:
+
+- **Home** – wyświetla profil oraz statystyki aktualnie zalogowanego użytkownika
+  - **Followers** (przez przycisk Followers) – lista obserwujących bieżącego użytkownika
+  - **Followings** (przez przycisk Followings) – lista użytkowników obserwowanych przez bieżącego użytkownika
+  - **Edit profile** (przez przycisk Edit profile) – umożliwia edycję profilu bieżącego użytkownika (aby nowe zdjęcie się pojawiło, wymagane jest ponowne uruchomienie aplikacji)
+- **History** – pokazuje rozegrane partie bieżącego użytkownika
+  - **Move history** (poprzez kartę meczu) – umożliwia analizę wykonanych ruchów
+- **Ranking** – wyświetla użytkowników uporządkowanych według ELO w każdym trybie
+  - **User profile** (poprzez kartę użytkownika) – pokazuje profil oraz statystyki wybranego użytkownika
+    - **Followers** (przez przycisk Followers) – lista obserwujących wybranego użytkownika
+    - **Followings** (przez przycisk Followings) – lista użytkowników obserwowanych przez wybranego użytkownika
+    - **Edit profile** (przez przycisk Edit profile) – umożliwia edycję profilu wybranego użytkownika (aby nowe zdjęcie się pojawiło, wymagane jest ponowne uruchomienie aplikacji)
+- **Social** – zawiera 4 zakładki: **Friends**, **Received requests** *(z opcją Akceptuj lub Odrzuć każde zaproszenie)*, **Sent requests** *(z możliwością anulowania)*, **All users**
+  - **User profile** (poprzez kartę użytkownika) – pokazuje profil oraz statystyki wybranego użytkownika
+    - **Followers** (przez przycisk Followers) – lista obserwujących wybranego użytkownika
+    - **Followings** (przez przycisk Followings) – lista użytkowników obserwowanych przez wybranego użytkownika
+    - **Edit profile** (przez przycisk Edit profile) – umożliwia edycję profilu wybranego użytkownika (aby nowe zdjęcie się pojawiło, wymagane jest ponowne uruchomienie aplikacji)
+- **More** – umożliwia zmianę wyglądu aplikacji oraz wylogowanie się
