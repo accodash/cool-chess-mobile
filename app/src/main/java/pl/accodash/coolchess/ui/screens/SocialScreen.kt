@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -138,21 +139,28 @@ fun SocialScreen(
                                     uuid = it.uuid,
                                     onClick = onUserClick,
                                     action = {
-                                        Button(onClick = {
-                                            scope.launch {
-                                                services.friendService.acceptFriendRequest(relation.id)
-                                                timesUpdated++
+                                        Column(
+                                            verticalArrangement = Arrangement.spacedBy(4.dp),
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Button(onClick = {
+                                                scope.launch {
+                                                    services.friendService.acceptFriendRequest(
+                                                        relation.id
+                                                    )
+                                                    timesUpdated++
+                                                }
+                                            }) {
+                                                Text(stringResource(R.string.accept_friend_request))
                                             }
-                                        }) {
-                                            Text(stringResource(R.string.accept_friend_request))
-                                        }
-                                        OutlinedButton(onClick = {
-                                            scope.launch {
-                                                services.friendService.removeFriend(relation.id)
-                                                timesUpdated++
+                                            OutlinedButton(onClick = {
+                                                scope.launch {
+                                                    services.friendService.removeFriend(relation.id)
+                                                    timesUpdated++
+                                                }
+                                            }) {
+                                                Text(stringResource(R.string.reject_friend_request))
                                             }
-                                        }) {
-                                            Text(stringResource(R.string.reject_friend_request))
                                         }
                                     }
                                 )

@@ -38,7 +38,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImage
+import coil.memory.MemoryCache
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -48,6 +51,7 @@ import pl.accodash.coolchess.api.CoolChessServices
 import pl.accodash.coolchess.api.models.User
 import pl.accodash.coolchess.api.services.UpdateUserRequest
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun EditProfileScreen(
     services: CoolChessServices,
@@ -138,6 +142,7 @@ fun EditProfileScreen(
                 scope.launch {
                     isLoading = true
                     try {
+                        val imageLoader = ImageLoader(context)
                         var uploadedImageUrl = imageUrl
 
                         selectedImageUri?.let { uri ->
@@ -151,6 +156,11 @@ fun EditProfileScreen(
                                 )
                                 val response = services.userService.uploadUserAvatar(part)
                                 uploadedImageUrl = response.imageUrl
+
+                                uploadedImageUrl?.let { url ->
+                                    imageLoader.memoryCache?.remove(MemoryCache.Key(url))
+                                    imageLoader.diskCache?.remove(url)
+                                }
                             }
                         }
 
