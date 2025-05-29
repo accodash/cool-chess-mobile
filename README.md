@@ -58,7 +58,62 @@ These bullets are accessible from the bottom bar after logging in:
     - **Edit profile** (through Edit profile button) – allows to update selected user's profile (for new image to be displayed, restart is required)
 - **More** – allows to change the app's look or sign out
 
+### 🗃️ Databases Schema
+
+> Graphical schema available here: [LINK]()
+
+#### Backend – PostgreSQL
+
+The backend uses a relational PostgreSQL database to manage all user data, matches, moves, and social interactions. Here's an overview of the main tables:
+
+#### 🧑‍💼 `user`
+Stores information about each user:
+- `uuid` – unique user identifier (PK)
+- `username`, `image_url`, `created_at`
+
+#### 📊 `rating`
+Stores a user's rating for a specific game mode:
+- `user_uuid` – links to the `user` table (FK)
+- `rating`, `mode`
+
+#### 🧩 `match`
+Represents a completed or in-progress match:
+- `id` – match identifier (PK)
+- `white_uuid`, `black_uuid` – players (FK → `user`)
+- `start_at`, `end_at`, `is_ranked`, `is_completed`, `winner_uuid`, `mode`
+
+#### ➡️ `move`
+Records each move made during a match:
+- `match_id` – link to the `match` table (FK)
+- `from`, `to` – board positions
+- `uuid` – user who made the move (FK → `user`)
+- `moved_at`, `time_left`
+
+#### 👥 `friend_relation`
+Stores friendships between users:
+- `first_uuid`, `second_uuid` – users involved in the friendship (FK → `user`)
+- `created_at`, `befriended_at`
+
+#### 👣 `following`
+Tracks user follow relationships:
+- `follower_uuid`, `followed_user_uuid` – users in a follow relationship (FK → `user`)
+
+#### Mobile – SQLite
+
+The mobile app uses a lightweight local SQLite database to store user preferences for the application.
+
+#### ⚙️ `user_preference`
+Stores local app settings such as UI theme preferences:
+- `key` – preference key (PK)
+- `value` – stored value for the given key
+
+<br>
+<br>
+
 ---
+
+<br>
+<br>
 
 ## Polish
 
@@ -115,3 +170,52 @@ Poniższe sekcje są dostępne z dolnego paska nawigacji po zalogowaniu:
     - **Followings** (przez przycisk Followings) – lista użytkowników obserwowanych przez wybranego użytkownika
     - **Edit profile** (przez przycisk Edit profile) – umożliwia edycję profilu wybranego użytkownika (aby nowe zdjęcie się pojawiło, wymagane jest ponowne uruchomienie aplikacji)
 - **More** – umożliwia zmianę wyglądu aplikacji oraz wylogowanie się
+
+### 🗃️ Schemat baz danych
+
+> Graficzny schemat dostępny pod linkiem: [LINK]()
+
+#### Backend – PostgreSQL
+
+Backend korzysta z relacyjnej bazy danych PostgreSQL i zarządza wszystkimi danymi użytkowników, meczów, ruchów oraz relacji społecznych. Oto przegląd najważniejszych tabel:
+
+#### 🧑‍💼 `user`
+Przechowuje dane każdego użytkownika:
+- `uuid` – unikalny identyfikator użytkownika (PK)
+- `username`, `image_url`, `created_at`
+
+#### 📊 `rating`
+Przechowuje ranking użytkownika dla danego trybu gry:
+- `user_uuid` – powiązanie z tabelą `user` (FK)
+- `rating`, `mode`
+
+#### 🧩 `match`
+Reprezentuje rozegrany mecz:
+- `id` – identyfikator meczu (PK)
+- `white_uuid`, `black_uuid` – gracze (FK → `user`)
+- `start_at`, `end_at`, `is_ranked`, `is_completed`, `winner_uuid`, `mode`
+
+#### ➡️ `move`
+Rejestruje ruchy wykonane w ramach meczu:
+- `match_id` – powiązanie z tabelą `match` (FK)
+- `from`, `to` – pozycje na szachownicy
+- `uuid` – kto wykonał ruch (FK → `user`)
+- `moved_at`, `time_left`
+
+#### 👥 `friend_relation`
+Przechowuje relacje znajomości między użytkownikami:
+- `first_uuid`, `second_uuid` – użytkownicy (FK → `user`)
+- `created_at`, `befriended_at`
+
+#### 👣 `following`
+Rejestruje, kto kogo obserwuje:
+- `follower_uuid`, `followed_user_uuid` – użytkownicy (FK → `user`)
+
+#### Mobile – SQLite
+
+W aplikacji mobilnej wykorzystywana jest lekka lokalna baza SQLite, która przechowuje preferencje użytkownika.
+
+#### ⚙️ `user_preference`
+Służy do zapisu lokalnych ustawień aplikacji, takich jak tryb ciemny, kolorystyka:
+- `key` – klucz preferencji (PK)
+- `value` – wartość przypisana do klucza
