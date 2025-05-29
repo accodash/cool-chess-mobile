@@ -3,6 +3,7 @@ package pl.accodash.coolchess.ui.screens
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -94,7 +96,8 @@ fun SocialScreen(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         itemsIndexed(friends) { index, relation ->
                             val user =
@@ -122,7 +125,8 @@ fun SocialScreen(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         itemsIndexed(receivedRequests) { index, relation ->
                             val user = relation.firstUser
@@ -135,21 +139,28 @@ fun SocialScreen(
                                     uuid = it.uuid,
                                     onClick = onUserClick,
                                     action = {
-                                        Button(onClick = {
-                                            scope.launch {
-                                                services.friendService.acceptFriendRequest(relation.id)
-                                                timesUpdated++
+                                        Column(
+                                            verticalArrangement = Arrangement.spacedBy(4.dp),
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Button(onClick = {
+                                                scope.launch {
+                                                    services.friendService.acceptFriendRequest(
+                                                        relation.id
+                                                    )
+                                                    timesUpdated++
+                                                }
+                                            }) {
+                                                Text(stringResource(R.string.accept_friend_request))
                                             }
-                                        }) {
-                                            Text(stringResource(R.string.accept_friend_request))
-                                        }
-                                        OutlinedButton(onClick = {
-                                            scope.launch {
-                                                services.friendService.removeFriend(relation.id)
-                                                timesUpdated++
+                                            OutlinedButton(onClick = {
+                                                scope.launch {
+                                                    services.friendService.removeFriend(relation.id)
+                                                    timesUpdated++
+                                                }
+                                            }) {
+                                                Text(stringResource(R.string.reject_friend_request))
                                             }
-                                        }) {
-                                            Text(stringResource(R.string.reject_friend_request))
                                         }
                                     }
                                 )
@@ -167,7 +178,8 @@ fun SocialScreen(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(16.dp)
                     ) {
                         itemsIndexed(sentRequests) { index, relation ->
                             val user = relation.secondUser

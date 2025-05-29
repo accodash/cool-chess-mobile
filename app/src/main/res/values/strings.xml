@@ -4,14 +4,17 @@
     <string name="unknown">Unknown</string>
     <string name="failed_to_load">Failed to load</string>
     <string name="no_users_found">No users found</string>
+    <string name="invalid">Invalid</string>
 
     <!--  Screens  -->
     <string name="home">Home</string>
     <string name="history">History</string>
+    <string name="move_history">Move history</string>
     <string name="ranking">Ranking</string>
     <string name="social">Social</string>
     <string name="more">More</string>
     <string name="user_profile">User profile</string>
+    <string name="edit_profile">Edit profile</string>
     <string name="followers">Followers</string>
     <string name="followings">Followings</string>
 
@@ -25,22 +28,29 @@
     <string name="login_caption">You have to log in to continue using our mobile app</string>
     <string name="loading">Loading…</string>
 
-    <!--  Logged screen  -->
+    <!--  Profile screen  -->
     <string name="hello_heading">Hello!</string>
-    <string name="edit_profile">Edit Profile</string>
+    <string name="elo_rating">Elo Rating:</string>
+    <string name="match">Match!</string>
+
+    <!--  Game History  -->
     <string name="bullet">Bullet</string>
     <string name="blitz">Blitz</string>
     <string name="rapid">Rapid</string>
-    <string name="elo_rating">Elo Rating:</string>
-    <string name="match">Match!</string>
+    <string name="won">WON</string>
+    <string name="lost">LOST</string>
+    <string name="draw">DRAW</string>
+    <string name="ongoing">ONGOING</string>
+    <string name="ranked">Ranked</string>
+    <string name="unranked">Unranked</string>
 
     <!--  Followings & Friends  -->
     <string name="follow">Follow</string>
     <string name="unfollow">Unfollow</string>
     <string name="add_friend">Add friend</string>
     <string name="remove_friend">Remove friend</string>
-    <string name="cancel_friend_request">Cancel request</string>
-    <string name="accept_friend_request">Accept request</string>
+    <string name="cancel_friend_request">Cancel</string>
+    <string name="accept_friend_request">Accept</string>
     <string name="reject_friend_request">Reject</string>
 
     <!--  Social Screen  -->
@@ -54,4 +64,14 @@
     <string name="created_at_oldest">Oldest</string>
     <string name="alphabetically_az">Name (A-Z)</string>
     <string name="alphabetically_za">Name (Z-A)</string>
+
+    <!--  Edit Profile Screen  -->
+    <string name="upload_image">Upload image</string>
+    <string name="username">Username</string>
+    <string name="save_changes">Save changes</string>
+
+    <!--  More Screen  -->
+    <string name="logout">Log out</string>
+    <string name="theme">Theme</string>
+    <string name="color_scheme">Color scheme</string>
 </resources>

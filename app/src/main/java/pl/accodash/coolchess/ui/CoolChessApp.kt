@@ -17,12 +17,38 @@ import pl.accodash.coolchess.api.RetrofitClient
 import pl.accodash.coolchess.api.models.User
 import pl.accodash.coolchess.api.services.FollowingService
 import pl.accodash.coolchess.api.services.FriendService
+import pl.accodash.coolchess.api.services.MatchService
+import pl.accodash.coolchess.api.services.MoveService
 import pl.accodash.coolchess.api.services.RatingService
 import pl.accodash.coolchess.api.services.UserService
 import pl.accodash.coolchess.auth.AuthManager
 import pl.accodash.coolchess.ui.screens.LoadingScreen
 import pl.accodash.coolchess.ui.screens.LoggedInScreen
 import pl.accodash.coolchess.ui.screens.LoginScreen
+
+fun getServices(token: String) = CoolChessServices(
+    userService = RetrofitClient.createService(UserService::class.java, token),
+    friendService = RetrofitClient.createService(
+        FriendService::class.java,
+        token
+    ),
+    followingService = RetrofitClient.createService(
+        FollowingService::class.java,
+        token
+    ),
+    ratingService = RetrofitClient.createService(
+        RatingService::class.java,
+        token
+    ),
+    matchService = RetrofitClient.createService(
+        MatchService::class.java,
+        token
+    ),
+    moveService = RetrofitClient.createService(
+        MoveService::class.java,
+        token
+    )
+)
 
 @Composable
 fun CoolChessApp(modifier: Modifier = Modifier) {
@@ -42,14 +68,7 @@ fun CoolChessApp(modifier: Modifier = Modifier) {
                 val credentials = authManager.getSavedCredentials()
                 if (credentials != null) {
                     val token = credentials.accessToken
-
-                    services = CoolChessServices(
-                        userService = RetrofitClient.createService(UserService::class.java, token),
-                        friendService = RetrofitClient.createService(FriendService::class.java, token),
-                        followingService = RetrofitClient.createService(FollowingService::class.java, token),
-                        ratingService = RetrofitClient.createService(RatingService::class.java, token),
-                    )
-
+                    services = getServices(token)
                     user = services!!.userService.getCurrentUser()
                 }
             } catch (e: Exception) {
@@ -71,15 +90,8 @@ fun CoolChessApp(modifier: Modifier = Modifier) {
                     try {
                         val credentials = authManager.login(context)
                         val token = credentials.accessToken
-                        val userService = RetrofitClient.createService(UserService::class.java, token)
-                        user = userService.getCurrentUser()
-
-                        services = CoolChessServices(
-                            userService = userService,
-                            friendService = RetrofitClient.createService(FriendService::class.java, token),
-                            followingService = RetrofitClient.createService(FollowingService::class.java, token),
-                            ratingService = RetrofitClient.createService(RatingService::class.java, token),
-                        )
+                        services = getServices(token)
+                        user = services!!.userService.getCurrentUser()
                     } catch (e: Exception) {
                         errorMessage = e.message ?: context.getString(R.string.unknown_error)
                     } finally {
@@ -90,6 +102,15 @@ fun CoolChessApp(modifier: Modifier = Modifier) {
             modifier = modifier
         )
     } else if (services != null) {
-        LoggedInScreen(user = user!!, services = services!!, modifier = modifier)
+        LoggedInScreen(user = user!!, services = services!!, modifier = modifier, onLogout = {
+            scope.launch {
+                try {
+                    authManager.logout(context)
+                    user = null
+                } catch (e: Exception) {
+                    errorMessage = e.message ?: context.getString(R.string.unknown_error)
+                }
+            }
+        })
     }
 }

@@ -3,6 +3,7 @@ package pl.accodash.coolchess.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -58,7 +59,10 @@ fun AllUsersList(
         isLoading = false
     }
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(
+        modifier = Modifier
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+    ) {
         UserListControls(
             search = search,
             sortBy = sortBy,
@@ -85,9 +89,9 @@ fun AllUsersList(
                 LazyColumn(
                     modifier = Modifier
                         .weight(1f)
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    contentPadding = PaddingValues(top = 16.dp)
                 ) {
                     itemsIndexed(users) { index, user ->
                         UserCard(

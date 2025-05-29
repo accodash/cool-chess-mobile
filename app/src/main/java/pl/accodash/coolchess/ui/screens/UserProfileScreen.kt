@@ -131,9 +131,11 @@ fun UserProfileScreen(
             Column(
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState())
             ) {
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (user!!.imageUrl != null) {
                         AsyncImage(

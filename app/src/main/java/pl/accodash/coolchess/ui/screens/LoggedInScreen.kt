@@ -1,5 +1,6 @@
 package pl.accodash.coolchess.ui.screens
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -32,8 +33,10 @@ enum class Screens(
     Social(R.string.social, "social", Icons.Filled.EmojiPeople),
     More(R.string.more, "more", Icons.Filled.MoreHoriz),
     UserProfile(R.string.user_profile, "user"),
+    EditProfile(R.string.edit_profile, "edit_profile"),
     Followers(R.string.followers, "followers"),
     Followings(R.string.followings, "followings"),
+    MatchHistory(R.string.move_history, "match_history"),
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,7 +44,8 @@ enum class Screens(
 fun LoggedInScreen(
     user: User,
     services: CoolChessServices,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onLogout: () -> Unit = {},
 ) {
     val navController = rememberNavController()
     var selectedTab by rememberSaveable { mutableStateOf(Screens.Home) }
@@ -93,7 +97,12 @@ fun LoggedInScreen(
                                         contentDescription = stringResource(item.label)
                                     )
                                 },
-                                label = { Text(stringResource(item.label)) }
+                                label = { Text(stringResource(item.label)) },
+                                colors = NavigationBarItemDefaults.colors(
+                                    selectedIconColor = MaterialTheme.colorScheme.tertiary,
+                                    selectedTextColor = MaterialTheme.colorScheme.tertiary,
+                                    indicatorColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f)
+                                )
                             )
                         }
                 }
@@ -108,9 +117,9 @@ fun LoggedInScreen(
             composable(Screens.Home.route) {
                 UserProfileScreen(
                     uuid = user.uuid,
-                    onEditProfileClick = {},
-                    onFollowersClick = {navController.navigate("${Screens.Followers.route}/$it")},
-                    onFollowingClick = {navController.navigate("${Screens.Followings.route}/$it")},
+                    onEditProfileClick = { navController.navigate(Screens.EditProfile.route) },
+                    onFollowersClick = { navController.navigate("${Screens.Followers.route}/$it") },
+                    onFollowingClick = { navController.navigate("${Screens.Followings.route}/$it") },
                     services = services
                 )
             }
@@ -124,7 +133,9 @@ fun LoggedInScreen(
                 )
             }
             composable(Screens.History.route) {
-
+                HistoryScreen(services = services, onMatchCardClick = {
+                    navController.navigate("${Screens.MatchHistory.route}/$it")
+                })
             }
             composable(Screens.Social.route) {
                 SocialScreen(
@@ -136,16 +147,20 @@ fun LoggedInScreen(
                 )
             }
             composable(Screens.More.route) {
-
+                MoreScreen(onLogout = onLogout)
             }
-            composable(
-                "${Screens.UserProfile.route}/{uuid}"
-            ) { route ->
+            composable("${Screens.UserProfile.route}/{uuid}") { route ->
                 UserProfileScreen(
                     uuid = route.arguments?.getString("uuid") ?: "",
                     services = services,
-                    onFollowersClick = {navController.navigate("${Screens.Followers.route}/$it")},
-                    onFollowingClick = {navController.navigate("${Screens.Followings.route}/$it")}
+                    onFollowersClick = { navController.navigate("${Screens.Followers.route}/$it") },
+                    onFollowingClick = { navController.navigate("${Screens.Followings.route}/$it") }
+                )
+            }
+            composable(Screens.EditProfile.route) {
+                EditProfileScreen(
+                    services = services,
+                    onProfileUpdated = { navController.navigateUp() }
                 )
             }
             composable("${Screens.Followers.route}/{uuid}") {
@@ -154,7 +169,7 @@ fun LoggedInScreen(
                     isFollowers = true,
                     services = services
                 ) { uuid ->
-                    navController.navigate("user/$uuid")
+                    navController.navigate("${Screens.UserProfile.route}/$uuid")
                 }
             }
             composable("${Screens.Followings.route}/{uuid}") {
@@ -163,8 +178,13 @@ fun LoggedInScreen(
                     isFollowers = false,
                     services = services
                 ) { uuid ->
-                    navController.navigate("user/$uuid")
+                    navController.navigate("${Screens.UserProfile.route}/$uuid")
                 }
+            }
+            composable("${Screens.MatchHistory.route}/{id}") {
+                MatchHistoryScreen(
+                    matchId = it.arguments?.getString("id") ?: "", services = services
+                )
             }
         }
     }
