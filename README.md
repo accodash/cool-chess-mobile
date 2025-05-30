@@ -60,7 +60,7 @@ These bullets are accessible from the bottom bar after logging in:
 
 ### 🗃️ Databases Schema
 
-> Graphical schema available here: [LINK]()
+<a href="https://github.com/accodash/cool-chess-mobile/blob/main/database-diagram.jpg" target="_blank"><img src="https://github.com/accodash/cool-chess-mobile/blob/main/database-diagram.jpg" /></a>
 
 #### Backend – PostgreSQL
 
@@ -173,7 +173,7 @@ Poniższe sekcje są dostępne z dolnego paska nawigacji po zalogowaniu:
 
 ### 🗃️ Schemat baz danych
 
-> Graficzny schemat dostępny pod linkiem: [LINK]()
+<a href="https://github.com/accodash/cool-chess-mobile/blob/main/database-diagram.jpg" target="_blank"><img src="https://github.com/accodash/cool-chess-mobile/blob/main/database-diagram.jpg" /></a>
 
 #### Backend – PostgreSQL
 
