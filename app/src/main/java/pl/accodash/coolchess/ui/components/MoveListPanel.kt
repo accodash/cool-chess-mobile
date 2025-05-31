@@ -91,7 +91,7 @@ fun MoveListPanel(
                     Text(move.to, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.width(60.dp))
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        text = formatTime(move.timeLeft),
+                        text = formatTime(move.timeLeft * 1000),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
