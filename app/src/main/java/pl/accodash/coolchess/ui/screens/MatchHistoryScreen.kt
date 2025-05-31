@@ -20,7 +20,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import pl.accodash.coolchess.R
 import pl.accodash.coolchess.api.CoolChessServices
 import pl.accodash.coolchess.api.models.Match
 import pl.accodash.coolchess.api.models.Move
@@ -86,7 +88,7 @@ fun MatchHistoryScreen(
 
     if (isError || match == null) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("Error loading match.")
+            Text(stringResource(R.string.failed_to_load))
         }
         return
     }
@@ -113,7 +115,7 @@ fun MatchHistoryScreen(
                 .fillMaxWidth()
                 .padding(top = 12.dp)
         ) {
-            Text("Select Move")
+            Text(stringResource(R.string.select_move))
         }
     }
 
