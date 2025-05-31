@@ -128,7 +128,7 @@ fun MatchCard(
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
-                    "${match.whitePlayer.username} vs ${match.blackPlayer.username}",
+                    match.whitePlayer.username + " " + stringResource(R.string.vs) + " " + match.blackPlayer.username,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(Modifier.width(8.dp))

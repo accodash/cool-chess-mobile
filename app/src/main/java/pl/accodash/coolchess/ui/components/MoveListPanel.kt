@@ -26,7 +26,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import pl.accodash.coolchess.R
 import pl.accodash.coolchess.api.models.Move
 import pl.accodash.coolchess.ui.utils.applyMoves
 import pl.accodash.coolchess.ui.utils.cloneBoard
@@ -41,7 +43,8 @@ fun MoveListPanel(
     userColor: String,
     modifier: Modifier = Modifier
 ) {
-    val initialBoard = parseFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", userColor) ?: return
+    val initialBoard =
+        parseFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", userColor) ?: return
     val boardStates = mutableListOf<List<List<Int?>>>()
     var currentBoard = cloneBoard(initialBoard)
 
@@ -58,7 +61,7 @@ fun MoveListPanel(
     ) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
             Text(
-                "Moves made",
+                stringResource(R.string.moves_made),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(12.dp)
             )
@@ -67,8 +70,9 @@ fun MoveListPanel(
                 val (row, col) = getSquareCoords(move.from, userColor) ?: (0 to 0)
                 val piece = board.getOrNull(row)?.getOrNull(col)
 
-                val backgroundColor = if (index == selectedIndex) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
-                else Color.Transparent
+                val backgroundColor =
+                    if (index == selectedIndex) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                    else Color.Transparent
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -87,11 +91,20 @@ fun MoveListPanel(
                     }
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(move.from, style = MaterialTheme.typography.bodyLarge)
-                    Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "to")
-                    Text(move.to, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.width(60.dp))
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = stringResource(
+                            R.string.to
+                        )
+                    )
+                    Text(
+                        move.to,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.width(60.dp)
+                    )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                        text = formatTime(move.timeLeft),
+                        text = formatTime(move.timeLeft * 1000),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
